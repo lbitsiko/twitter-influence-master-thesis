@@ -1,7 +1,9 @@
 # twitter-influence-master-thesis
 
 National Technical University of Athens (NTUA)
+
 School of Applied Mathematical and Physical Sciences
+
 MSc. in Mathematical Modelling in Modern Technologies and Financial Engineering
 
 Title:
