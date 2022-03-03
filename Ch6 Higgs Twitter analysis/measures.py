@@ -9,7 +9,10 @@ def follower_rank(graph, f1, f3):
     # degree_dict = dict(graph.degree)
     fr_dict = {}
     for i in graph.nodes:
-        fr_dict[i] = f1[i] / (f1[i] + f3[i])
+        if float(f1[i] + f3[i]) != 0.0:
+            fr_dict[i] = float(f1[i]) / float(f1[i] + f3[i])
+        else:
+            fr_dict[i] = 1.0
         # fr_dict[i] = float(f1[i]) / float(f1[i] + f3[i])
     return fr_dict
 
@@ -27,7 +30,7 @@ def tff(graph, f1, f3):
         try:
             tff_dict[i] = float(f1[i]) / float(f3[i])
         except ZeroDivisionError:
-            tff_dict[i] = 0.0  # 'infty'
+            tff_dict[i] = 1.0  # 'infty'
     return tff_dict
 
 
@@ -52,7 +55,7 @@ def paradoxical_discounted(graph, df, f1, f3):
                 paradox_disc_dict[i] = float(f1[i] - reciprocal_dict[i]) / float(
                     f3[i] - reciprocal_dict[i])
         except ZeroDivisionError:
-            paradox_disc_dict[i] = 0.0  # 'infty'
+            paradox_disc_dict[i] = 1.0  # 'infty'
     return paradox_disc_dict
 
 
@@ -112,7 +115,7 @@ def retweet_impact(graph_social, rt2, rt3):
         if rt3[i] != 0.0:
             ri_dict[i] = rt2[i] * np.log(rt3[i])
         else:
-            ri_dict[i] = 0.0  # '-infty'
+            ri_dict[i] = 1.0  # '-infty'
     return ri_dict
 
 
@@ -129,7 +132,7 @@ def mention_impact(graph_social, m1, m2, m3, m4):
         if m4[i] != 0.0 and m2[i] != 0.0:
             mi_dict[i] = m3[i] * np.log(float(m4[i])) - m1[i] * np.log(float(m2[i]))
         else:
-            mi_dict[i] = 0.0  # '-infty'
+            mi_dict[i] = 1.0  # '-infty'
     return mi_dict
 
 import networkx as nx
